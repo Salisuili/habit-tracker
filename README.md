@@ -67,3 +67,4 @@ python -m unittest discover tests
 * **GUI:** Development of a graphical user interface for a desktop experience.
 * **Notifications:** Integration of habit reminders and "nudge" notifications.
 * **Visual Analytics:** Implementation of graphs and charts to visualize progress over time.
+
