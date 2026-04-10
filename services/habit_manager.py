@@ -55,20 +55,21 @@ class HabitManager:
     def analyze_habit(self, habit_id):
         """
         Analyses a habit's completion data.
-
-        This method calculates statistics such as the total number
-        of completions and the longest completion streak.
-
-        Args:
-            habit_id (int): The ID of the habit to analyse.
-
-        Returns:
-            dict: A dictionary containing:
-                - total: total number of completions
-                - longest_streak: longest consecutive completion streak
         """
+
+        # Get completion dates
         dates = self.db.get_completions(habit_id)
+
+        # Get habit details
+        habit = self.db.get_habit_by_id(habit_id)
+
+        if habit is None:
+            return {"error": "Habit not found"}
+
+        # Extract frequency
+        frequency = habit[2]
+
         return {
             "total": Analytics.total_completions(dates),
-            "longest_streak": Analytics.longest_streak(dates)
+            "longest_streak": Analytics.longest_streak(dates, frequency)
         }

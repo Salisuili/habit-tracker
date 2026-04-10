@@ -106,3 +106,18 @@ class DatabaseHandler:
             (habit_id,)
         )
         return [row[0] for row in cursor.fetchall()]
+    
+    def get_habit_by_id(self, habit_id):
+        """
+        Retrieves a single habit by its ID.
+
+        Args:
+            habit_id (int): The ID of the habit.
+
+        Returns:
+            tuple: Habit record (id, name, frequency, start_date)
+                or None if not found.
+        """
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT * FROM habits WHERE id = ?", (habit_id,))
+        return cursor.fetchone()
